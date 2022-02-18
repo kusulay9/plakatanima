@@ -76,6 +76,35 @@ for c in cnt:
             plt.show()
             if(kon):
                 break
+def findListOfMatchingChars(possibleChar, listOfChars):
+           
+    listOfMatchingChars = []                
+
+    for possibleMatchingChar in listOfChars:                
+        if possibleMatchingChar == possibleChar:    
+            continue                                
+                    
+        fltDistanceBetweenChars = distanceBetweenChars(possibleChar, possibleMatchingChar)
+
+        fltAngleBetweenChars = angleBetweenChars(possibleChar, possibleMatchingChar)
+
+        fltChangeInArea = float(abs(possibleMatchingChar.intBoundingRectArea - possibleChar.intBoundingRectArea)) / float(possibleChar.intBoundingRectArea)
+
+        fltChangeInWidth = float(abs(possibleMatchingChar.intBoundingRectWidth - possibleChar.intBoundingRectWidth)) / float(possibleChar.intBoundingRectWidth)
+        fltChangeInHeight = float(abs(possibleMatchingChar.intBoundingRectHeight - possibleChar.intBoundingRectHeight)) / float(possibleChar.intBoundingRectHeight)
+
+               
+        if (fltDistanceBetweenChars < (possibleChar.fltDiagonalSize * MAX_DIAG_SIZE_MULTIPLE_AWAY) and
+            fltAngleBetweenChars < MAX_ANGLE_BETWEEN_CHARS and
+            fltChangeInArea < MAX_CHANGE_IN_AREA and
+            fltChangeInWidth < MAX_CHANGE_IN_WIDTH and
+            fltChangeInHeight < MAX_CHANGE_IN_HEIGHT):
+
+            listOfMatchingChars.append(possibleMatchingChar)        
+    
+    return listOfMatchingChars             
+
+
 def getOtsuThreshold(im):
     size = 256 
     buckets = np.zeros([size]) 
