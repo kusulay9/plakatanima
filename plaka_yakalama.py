@@ -76,6 +76,15 @@ for c in cnt:
             plt.show()
             if(kon):
                 break
+def getOtsuThreshold(im):
+    size = 256 
+    buckets = np.zeros([size]) 
+    imy = im.shape[0]
+    imx = im.shape[1]
+    image_size = imx*imy
+    for i in xrange(imy):
+        for j in xrange(imx):
+            buckets[im[i][j]] += 1
         
 
 
